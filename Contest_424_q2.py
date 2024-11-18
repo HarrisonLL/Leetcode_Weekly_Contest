@@ -9,21 +9,19 @@ in each index, find the net diff with original nums
 '''
 class Solution:
     def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:
+        m = len(queries)
         events = defaultdict(int)
-        for query in queries:
-            events[query[0]] += 1
-            events[query[1]+1] -= 1
-        events = sorted(events.items())
+        for i in range(m):
+            l, r = queries[i]
+            events[l] += 1
+            events[r+1] -= 1
+        events = dict(sorted(events.items()))
         diff = []
         curr = 0
-        for i in range(len(events)-1):
-            curr += events[i][1]
-            curr_idx = events[i][0]
-            next_idx = events[i+1][0]
-            while curr_idx < next_idx:
-                diff.append(curr)
-                curr_idx += 1
-        diff.append(curr)
+        for i in range(len(nums)):
+            if i in events:
+                curr += events[i]
+            diff.append(curr)
         for i in range(len(nums)):
             if nums[i] - diff[i] > 0:
                 return False
