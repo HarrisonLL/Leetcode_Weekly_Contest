@@ -6,6 +6,7 @@ sweeping line.
 the first element in query can be seemed as +1
 the second element in query can be seemed as -1
 in each index, find the net diff with original nums
+time: O(n)
 '''
 class Solution:
     def isZeroArray(self, nums: List[int], queries: List[List[int]]) -> bool:
@@ -15,7 +16,6 @@ class Solution:
             l, r = queries[i]
             events[l] += 1
             events[r+1] -= 1
-        events = dict(sorted(events.items()))
         diff = []
         curr = 0
         for i in range(len(nums)):

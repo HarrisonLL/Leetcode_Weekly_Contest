@@ -1,5 +1,7 @@
 '''
+https://leetcode.com/problems/zero-array-transformation-ii/
 sweep line + binary search
+time: O(nlog(n))
 '''
 class Solution:
     def minZeroArray(self, nums: List[int], queries: List[List[int]]) -> int:
@@ -9,7 +11,6 @@ class Solution:
                 l, r, v = queries[i]
                 events[l] += v
                 events[r+1] -= v
-            events = dict(sorted(events.items()))
             diff = []
             curr = 0
             for i in range(len(nums)):
